@@ -1,0 +1,8 @@
+src/.idea
+src/DisqordSharedRateLimit/bin
+src/DisqordSharedRateLimit/obj
+/src/DisqordSharedRateLimit.sln.DotSettings.user
+src/DisqordSharedRateLimit.Test/bin
+src/DisqordSharedRateLimit.Test/obj
+/src/DisqordSharedRateLimit.Test.sln.DotSettings.user
+src/DisqordSharedRateLimit.Test/appsettings.json

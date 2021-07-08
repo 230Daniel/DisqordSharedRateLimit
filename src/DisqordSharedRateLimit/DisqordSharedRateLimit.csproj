@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>DisqordSharedRatelimit</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Disqord.Rest.Api" Version="1.0.0-07082021-49" />
+      <PackageReference Include="StackExchange.Redis" Version="2.2.62" />
+    </ItemGroup>
+
+</Project>
