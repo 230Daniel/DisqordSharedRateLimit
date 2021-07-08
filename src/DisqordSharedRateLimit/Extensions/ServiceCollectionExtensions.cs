@@ -1,5 +1,6 @@
 ﻿using System;
 using Disqord.Rest.Api;
+using DisqordSharedRatelimit.Rest;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DisqordSharedRatelimit.Extensions
