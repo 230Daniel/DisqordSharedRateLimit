@@ -16,14 +16,5 @@ namespace DisqordSharedRatelimit.Rest
         }
 
         public Bucket() { }
-
-        public void Update()
-        {
-            if (ResetsAt <= DateTimeOffset.UtcNow)
-            {
-                Remaining = 3;
-                ResetsAt = DateTimeOffset.UtcNow.AddSeconds(10);
-            }
-        }
     }
 }
