@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using Disqord.Rest.Api;
 using Disqord.Utilities.Binding;
-using DisqordSharedRatelimit.Extensions;
+using DisqordSharedRateLimit.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using StackExchange.Redis;
 
-namespace DisqordSharedRatelimit.Rest
+namespace DisqordSharedRateLimit.Rest
 {
     public sealed class SharedRestRateLimiter : IRestRateLimiter
     {

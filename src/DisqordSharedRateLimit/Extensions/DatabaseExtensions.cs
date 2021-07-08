@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Text.Json;
 using System.Threading.Tasks;
-using DisqordSharedRatelimit.Rest;
+using DisqordSharedRateLimit.Rest;
 using StackExchange.Redis;
 
-namespace DisqordSharedRatelimit.Extensions
+namespace DisqordSharedRateLimit.Extensions
 {
     internal static class DatabaseExtensions
     {

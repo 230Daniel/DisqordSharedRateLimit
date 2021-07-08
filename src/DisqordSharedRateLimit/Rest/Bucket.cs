@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DisqordSharedRatelimit.Rest
+namespace DisqordSharedRateLimit.Rest
 {
     internal class Bucket
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using Disqord.Rest.Api;
-using DisqordSharedRatelimit.Rest;
+using DisqordSharedRateLimit.Rest;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DisqordSharedRatelimit.Extensions
+namespace DisqordSharedRateLimit.Extensions
 {
     public static class ServiceCollectionExtensions
     {

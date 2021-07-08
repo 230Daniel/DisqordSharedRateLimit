@@ -6,10 +6,10 @@ using Disqord.Http;
 using Disqord.Logging;
 using Disqord.Rest.Api;
 using Disqord.Rest.Api.Default;
-using DisqordSharedRatelimit.Extensions;
+using DisqordSharedRateLimit.Extensions;
 using Microsoft.Extensions.Logging;
 
-namespace DisqordSharedRatelimit.Rest
+namespace DisqordSharedRateLimit.Rest
 {
     internal sealed class RequestQueue : ILogging
     {
