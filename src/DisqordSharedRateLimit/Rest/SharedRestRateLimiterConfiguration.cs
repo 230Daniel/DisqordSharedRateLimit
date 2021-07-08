@@ -1,6 +1,6 @@
 ﻿using StackExchange.Redis;
 
-namespace DisqordSharedRatelimit
+namespace DisqordSharedRatelimit.Rest
 {
     public sealed class SharedRestRateLimiterConfiguration
     {

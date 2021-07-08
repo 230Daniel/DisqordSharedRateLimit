@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using Disqord;
 using Disqord.Bot;
+using Disqord.Rest;
 using Qmmands;
 
 namespace DisqordSharedRatelimit.Test.Commands.Modules
 {
-    public class TestModule : DiscordModuleBase
+    public class TestModule : DiscordGuildModuleBase
     {
         [Command("Echo")]
         public DiscordCommandResult EchoAsync(
@@ -16,13 +17,13 @@ namespace DisqordSharedRatelimit.Test.Commands.Modules
         
         [Command("Spam")]
         [RequireBotOwner]
-        public async Task<DiscordCommandResult> SpamAsync(
+        public DiscordCommandResult SpamAsync(
             [Range(0, 20)] 
             int count = 10)
         {
             for (var i = 1; i <= count; i++)
             {
-                await Response($"Spamming! {i}/{count}");
+                _ = Context.Channel.SendMessageAsync(new LocalMessage().WithContent($"Spamming! {i}/{count}"));
             }
             return Response("Done");
         }
