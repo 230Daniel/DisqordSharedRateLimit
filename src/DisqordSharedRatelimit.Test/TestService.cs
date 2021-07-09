@@ -4,7 +4,7 @@ using Disqord.Bot;
 using Disqord.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace DisqordSharedRatelimit.Test
+namespace DisqordSharedRateLimit.Test
 {
     public class TestService : DiscordClientService
     {

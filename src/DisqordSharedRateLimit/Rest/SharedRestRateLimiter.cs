@@ -50,14 +50,14 @@ namespace DisqordSharedRateLimit.Rest
             
             lock (this)
             {
-                bucket = Database.GetBucket(bucketId);
+                bucket = Database.GetRestBucket(bucketId);
                 if (bucket is null)
                 {
                     bucket = new Bucket(bucketId)
                     {
                         FirstRequest = true
                     };
-                    Database.SetBucket(bucket);
+                    Database.SetRestBucket(bucket);
                 }
             }
             

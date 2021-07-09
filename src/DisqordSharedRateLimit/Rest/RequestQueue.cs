@@ -47,8 +47,8 @@ namespace DisqordSharedRateLimit.Rest
                 var request = _requests.First.Value;
                 _requests.RemoveFirst();
 
-                await _rateLimiter.Database.LockBucketAsync(Bucket.Id);
-                Bucket = _rateLimiter.Database.GetBucket(Bucket.Id);
+                await _rateLimiter.Database.LockRestBucketAsync(Bucket.Id);
+                Bucket = _rateLimiter.Database.GetRestBucket(Bucket.Id);
                 
                 if (!Bucket.FirstRequest && Bucket.Remaining == 0)
                 {
@@ -65,7 +65,7 @@ namespace DisqordSharedRateLimit.Rest
 
                 await ExecuteAsync(request);
 
-                await _rateLimiter.Database.UnlockBucketAsync(Bucket.Id);
+                await _rateLimiter.Database.UnlockRestBucketAsync(Bucket.Id);
             }
         }
 
@@ -105,7 +105,7 @@ namespace DisqordSharedRateLimit.Rest
                 Bucket.Remaining = 0;
                 Bucket.ResetsAt = DateTimeOffset.UtcNow + headers.RetryAfter.Value;
                 
-                _rateLimiter.Database.SetBucket(Bucket);
+                _rateLimiter.Database.SetRestBucket(Bucket);
                 Logger.LogWarning("Bucket {Id} hit a rate-limit! Retry-After: {RetryAfter}ms)", Bucket.Id, headers.RetryAfter.Value.TotalMilliseconds);
                 return true;
             }
@@ -117,7 +117,7 @@ namespace DisqordSharedRateLimit.Rest
             Bucket.Remaining = headers.Remaining.Value;
             Bucket.ResetsAt = DateTimeOffset.UtcNow + headers.ResetsAfter.Value;
 
-            _rateLimiter.Database.SetBucket(Bucket);
+            _rateLimiter.Database.SetRestBucket(Bucket);
             Logger.LogDebug("Bucket {Id} has updated to ({Remaining}/{Limit}, {ResetAfter})", Bucket.Id, Bucket.Remaining, Bucket.Limit, headers.ResetsAfter.Value);
             
             return false;

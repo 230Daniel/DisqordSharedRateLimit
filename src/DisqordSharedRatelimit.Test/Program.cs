@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using Disqord.Bot.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using DisqordSharedRatelimit.Extensions;
+using DisqordSharedRateLimit.Extensions;
 using Microsoft.Extensions.Configuration;
 
-namespace DisqordSharedRatelimit.Test
+namespace DisqordSharedRateLimit.Test
 {
     internal class Program
     {
@@ -14,10 +14,12 @@ namespace DisqordSharedRatelimit.Test
         {
             var host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices(ConfigureServices)
-                .ConfigureDiscordBot((context, bot) =>
+                .ConfigureDiscordBotSharder((context, bot) =>
                 {
                     bot.Token = context.Configuration["Discord:Token"];
+                    bot.ShardCount = 3;
                 })
+                
                 .Build();
 
             try
@@ -37,6 +39,18 @@ namespace DisqordSharedRatelimit.Test
         private static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
         {
             services.AddSharedRestRateLimiter(config =>
+            {
+                config.RedisConfiguration = new()
+                {
+                    EndPoints =
+                    {
+                        { context.Configuration["Redis:Host"], context.Configuration.GetValue<int>("Redis:Port") }
+                    },
+                    Password = context.Configuration["Redis:Password"]
+                };
+            });
+            
+            services.AddSharedGatewayRateLimiter(config =>
             {
                 config.RedisConfiguration = new()
                 {

@@ -3,7 +3,7 @@ using Disqord.Bot;
 using Disqord.Rest;
 using Qmmands;
 
-namespace DisqordSharedRatelimit.Test.Commands.Modules
+namespace DisqordSharedRateLimit.Test.Commands.Modules
 {
     public class TestModule : DiscordGuildModuleBase
     {
