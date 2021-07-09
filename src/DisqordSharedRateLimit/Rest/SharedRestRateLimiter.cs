@@ -20,7 +20,7 @@ namespace DisqordSharedRateLimit.Rest
 
         public SharedRestRateLimiter(
             ILogger<SharedRestRateLimiter> logger,
-            IOptions<SharedRestRateLimiterConfiguration> config)
+            IOptions<SharedRateLimiterConfiguration> config)
         {
             Logger = logger;
             _binder = new Binder<IRestApiClient>(this);

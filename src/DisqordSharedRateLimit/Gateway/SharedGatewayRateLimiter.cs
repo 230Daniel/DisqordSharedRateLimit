@@ -28,7 +28,7 @@ namespace DisqordSharedRateLimit.Gateway
         private readonly Dictionary<GatewayPayloadOperation, SimpleBucket> _buckets;
 
         public SharedGatewayRateLimiter(
-            IOptions<SharedGatewayRateLimiterConfiguration> config,
+            IOptions<SharedRateLimiterConfiguration> config,
             ILoggerFactory loggerFactory)
         {
             _loggerFactory = loggerFactory;

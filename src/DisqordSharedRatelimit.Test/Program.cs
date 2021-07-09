@@ -17,7 +17,7 @@ namespace DisqordSharedRateLimit.Test
                 .ConfigureDiscordBotSharder((context, bot) =>
                 {
                     bot.Token = context.Configuration["Discord:Token"];
-                    bot.ShardCount = 3;
+                    //bot.ShardCount = 3;
                 })
                 
                 .Build();
@@ -38,19 +38,7 @@ namespace DisqordSharedRateLimit.Test
         
         private static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
         {
-            services.AddSharedRestRateLimiter(config =>
-            {
-                config.RedisConfiguration = new()
-                {
-                    EndPoints =
-                    {
-                        { context.Configuration["Redis:Host"], context.Configuration.GetValue<int>("Redis:Port") }
-                    },
-                    Password = context.Configuration["Redis:Password"]
-                };
-            });
-            
-            services.AddSharedGatewayRateLimiter(config =>
+            services.AddSharedRateLimiters(config =>
             {
                 config.RedisConfiguration = new()
                 {
