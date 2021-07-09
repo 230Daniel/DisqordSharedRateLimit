@@ -46,7 +46,8 @@ namespace DisqordSharedRateLimit.Test
                     {
                         { context.Configuration["Redis:Host"], context.Configuration.GetValue<int>("Redis:Port") }
                     },
-                    Password = context.Configuration["Redis:Password"]
+                    DefaultDatabase = context.Configuration.GetValue<int>("Redis:Database"),
+                    Password = context.Configuration["Redis:Password"],
                 };
             });
         }
