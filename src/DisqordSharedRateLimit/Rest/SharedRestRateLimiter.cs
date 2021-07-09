@@ -27,7 +27,7 @@ namespace DisqordSharedRateLimit.Rest
             _requestQueues = new();
             
             var redis = ConnectionMultiplexer.Connect(config.Value.RedisConfiguration);
-            Database = redis.GetDatabase(0);
+            Database = redis.GetDatabase();
         }
         
         public void Bind(IRestApiClient value)

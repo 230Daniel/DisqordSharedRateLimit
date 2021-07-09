@@ -4,7 +4,7 @@ A ratelimiter implementation for the [Disqord](https://github.com/Quahu/Disqord/
 
  - Makes use of [Redis](https://redis.io/) to communicate between seperate bot processes
  - Obeys rest rate limits per-route
- - Obeys the global rest rate limit
+ - Obeys the global rest rate limit (WIP)
  - Obeys the global gateway identify rate limit
 
 ## Example Usage
@@ -20,6 +20,7 @@ private static void ConfigureServices(HostBuilderContext context, IServiceCollec
             {
                 { context.Configuration["Redis:Host"], context.Configuration.GetValue<int>("Redis:Port") }
             },
+			DefaultDatabase = 0,
             Password = context.Configuration["Redis:Password"]
         };
     });

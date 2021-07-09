@@ -43,7 +43,7 @@ namespace DisqordSharedRateLimit.Gateway
             _buckets = new Dictionary<GatewayPayloadOperation, SimpleBucket>(2);
             
             var redis = ConnectionMultiplexer.Connect(config.Value.RedisConfiguration);
-            Database = redis.GetDatabase(0);
+            Database = redis.GetDatabase();
         }
 
         public void Bind(IGatewayApiClient apiClient)
