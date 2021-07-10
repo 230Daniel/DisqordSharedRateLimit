@@ -3,8 +3,8 @@
 A ratelimiter implementation for the [Disqord](https://github.com/Quahu/Disqord/) library.
 
  - Makes use of [Redis](https://redis.io/) to communicate between seperate bot processes
- - Obeys rest rate limits per-route
- - Obeys the global rest rate limit (WIP)
+ - Obeys per-route rest rate limits
+ - Obeys the global rest rate limit
  - Obeys the global gateway identify rate limit
 
 ## Example Usage

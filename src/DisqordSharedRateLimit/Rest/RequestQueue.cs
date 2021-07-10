@@ -63,6 +63,32 @@ namespace DisqordSharedRateLimit.Rest
                     }
                 }
 
+                await _rateLimiter.Database.LockRestGlobalBucketAsync();
+                var globalBucket = _rateLimiter.Database.GetRestGlobalBucket();
+
+                if (globalBucket is null)
+                {
+                    globalBucket = new GlobalBucket();
+                    globalBucket.Reset();
+                }
+                else if (globalBucket.ResetsAt <= DateTimeOffset.UtcNow)
+                    globalBucket.Reset();
+                
+                if (globalBucket.Remaining == 0)
+                {
+                    var delay = globalBucket.ResetsAt - DateTimeOffset.UtcNow;
+                    if (delay > TimeSpan.Zero)
+                    {
+                        Logger.LogWarning("The global bucket is pre-emptively rate-limiting, delaying for {Delay}", delay);
+                        await Task.Delay(delay);
+                        globalBucket.Reset();
+                    }
+                }
+
+                globalBucket.Remaining--;
+                _rateLimiter.Database.SetRestGlobalBucket(globalBucket);
+                _rateLimiter.Database.UnlockRestGlobalBucket();
+
                 await ExecuteAsync(request);
 
                 await _rateLimiter.Database.UnlockRestBucketAsync(Bucket.Id);

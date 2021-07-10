@@ -24,8 +24,8 @@ namespace DisqordSharedRateLimit.Gateway
 
         private readonly ILoggerFactory _loggerFactory;
         private readonly Binder<IGatewayApiClient> _binder;
-        private readonly SimpleBucket _masterBucket;
-        private readonly Dictionary<GatewayPayloadOperation, SimpleBucket> _buckets;
+        private readonly Bucket _masterBucket;
+        private readonly Dictionary<GatewayPayloadOperation, Bucket> _buckets;
 
         public SharedGatewayRateLimiter(
             IOptions<SharedRateLimiterConfiguration> config,
@@ -39,8 +39,8 @@ namespace DisqordSharedRateLimit.Gateway
                     throw new ArgumentException("The shared gateway rate-limiter supports only bot tokens.");
             });
 
-            _masterBucket = new SimpleBucket(null, 120 - Heartbeats, TimeSpan.FromSeconds(60));
-            _buckets = new Dictionary<GatewayPayloadOperation, SimpleBucket>(2);
+            _masterBucket = new Bucket(null, 120 - Heartbeats, TimeSpan.FromSeconds(60));
+            _buckets = new Dictionary<GatewayPayloadOperation, Bucket>(2);
             
             var redis = ConnectionMultiplexer.Connect(config.Value.RedisConfiguration);
             Database = redis.GetDatabase();
@@ -49,7 +49,7 @@ namespace DisqordSharedRateLimit.Gateway
         public void Bind(IGatewayApiClient apiClient)
         {
             _binder.Bind(apiClient);
-            _buckets[GatewayPayloadOperation.UpdatePresence] = new SimpleBucket(_loggerFactory.CreateLogger("Presence Bucket"), 5, TimeSpan.FromSeconds(60));
+            _buckets[GatewayPayloadOperation.UpdatePresence] = new Bucket(_loggerFactory.CreateLogger("Presence Bucket"), 5, TimeSpan.FromSeconds(60));
         }
         
         public bool IsRateLimited(GatewayPayloadOperation? operation = null)

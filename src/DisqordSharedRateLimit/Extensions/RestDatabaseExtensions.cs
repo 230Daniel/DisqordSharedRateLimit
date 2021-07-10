@@ -36,5 +36,34 @@ namespace DisqordSharedRateLimit.Extensions
         {
             await db.LockReleaseAsync($"lock-rest-{bucketId}", "");
         }
+        
+        public static GlobalBucket GetRestGlobalBucket(this IDatabase db)
+        {
+            var value = db.StringGet("rest-global");
+            return value.HasValue
+                ? JsonSerializer.Deserialize<GlobalBucket>(value)
+                : null;
+        }
+        
+        public static void SetRestGlobalBucket(this IDatabase db, GlobalBucket bucket)
+        {
+            var json = JsonSerializer.Serialize(bucket);
+            db.StringSet("rest-global", json);
+        }
+
+        public static async Task LockRestGlobalBucketAsync(this IDatabase db)
+        {
+            var success = false;
+            while (!success)
+            {
+                success = await db.LockTakeAsync("lock-rest-global", "", TimeSpan.FromSeconds(10));
+                if (!success) await Task.Delay(50);
+            }
+        }
+        
+        public static void UnlockRestGlobalBucket(this IDatabase db)
+        {
+            db.LockRelease("lock-rest-global", "");
+        }
     }
 }

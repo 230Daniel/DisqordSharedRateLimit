@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace DisqordSharedRateLimit.Gateway
 {
-    internal class SimpleBucket
+    internal class Bucket
     {
         public int CurrentCount
             {
@@ -24,7 +24,7 @@ namespace DisqordSharedRateLimit.Gateway
             private readonly TimeSpan _resetDelay;
             private bool _isResetting;
 
-            public SimpleBucket(ILogger logger, int uses, TimeSpan resetDelay)
+            public Bucket(ILogger logger, int uses, TimeSpan resetDelay)
             {
                 _logger = logger;
                 _semaphore = new BetterSemaphoreSlim(uses, uses);
