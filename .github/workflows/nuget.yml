@@ -10,7 +10,7 @@ jobs:
 
     env:
       BUILD_CONFIG: 'Release'
-      SOLUTION: 'src/DisqordSharedRateLimit.sln'
+      SOLUTION: '.\src\DisqordSharedRateLimit.sln'
 
     runs-on: ubuntu-latest
 
