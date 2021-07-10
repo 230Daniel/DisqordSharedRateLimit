@@ -30,6 +30,7 @@ jobs:
 
     - name: Setup NuGet Sources
         run: nuget sources add -Name "Disqord" -Source "https://www.myget.org/F/disqord/api/v3/index.json"
+        shell: cmd
 
     - name: Restore dependencies
       run: nuget restore $SOLUTION
