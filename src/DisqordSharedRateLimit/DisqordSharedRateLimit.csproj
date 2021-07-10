@@ -3,6 +3,12 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <RootNamespace>DisqordSharedRateLimit</RootNamespace>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>DisqordSharedRateLimit</Title>
+        <Authors>Daniel Baynton</Authors>
+        <Description>A ratelimiting extension for Disqord which uses Redis to communicate between seperate bot processes </Description>
+        <PackageLicenseUrl>https://github.com/230Daniel/DisqordSharedRateLimit/blob/master/LICENSE</PackageLicenseUrl>
+        <RepositoryUrl>https://github.com/230Daniel/DisqordSharedRateLimit</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
