@@ -9,6 +9,7 @@
         <Description>A ratelimiting extension for Disqord which uses Redis to communicate between seperate bot processes </Description>
         <PackageLicenseUrl>https://github.com/230Daniel/DisqordSharedRateLimit/blob/master/LICENSE</PackageLicenseUrl>
         <RepositoryUrl>https://github.com/230Daniel/DisqordSharedRateLimit</RepositoryUrl>
+        <PackageVersion>1.0.0</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
