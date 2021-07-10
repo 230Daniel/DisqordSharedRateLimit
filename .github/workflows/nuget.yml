@@ -10,7 +10,7 @@ jobs:
 
     env:
       BUILD_CONFIG: 'Release'
-      SOLUTION: 'src\DisqordSharedRateLimit.sln'
+      SOLUTION: 'DisqordSharedRateLimit.sln'
 
     runs-on: ubuntu-latest
 
@@ -25,6 +25,9 @@ jobs:
         echo "BUILD_VERSION=$version" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf-8 -Append
       shell: pwsh
 
+    - name: Get Directory Contents
+      run: ls -la
+    
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
 
