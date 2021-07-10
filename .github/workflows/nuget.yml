@@ -10,7 +10,7 @@ jobs:
 
     env:
       BUILD_CONFIG: 'Release'
-      SOLUTION: 'DisqordSharedRateLimit.sln'
+      SOLUTION: './src/DisqordSharedRateLimit.sln'
 
     runs-on: ubuntu-latest
 
@@ -26,7 +26,7 @@ jobs:
       shell: pwsh
 
     - name: Get Directory Contents
-      run: ls -la
+      run: ls -la | cd src | ls -la
     
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0.5
